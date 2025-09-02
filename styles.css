@@ -1,0 +1,45 @@
+.container1 {
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background-color: rgb(246, 153, 3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+body {
+    background-color: rgb(222, 193, 153);
+}
+titl {
+    font-size: 24px;
+    color:aliceblue;
+}
+titr {
+    font-size: 16px;
+    color:aliceblue;
+}
+.container2 {
+text-align: center;
+font-size: 12px;
+}
+.container3{
+    font-size: 12px;
+    width: 100%;
+    height: auto;
+    color: chocolate;
+}
+.bold{
+    color: solid black;
+    font-size: 16px;
+}
+.container4 {
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background-color: rgb(246, 153, 3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
