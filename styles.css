@@ -1,15 +1,18 @@
+/* Reset and base styles */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: #f0f8ff;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   height: 100vh;
   overflow: hidden;
 }
 
-#game {
+/* Game container */
+#game-container {
   position: relative;
   width: 800px;
   height: 300px;
@@ -17,8 +20,10 @@ body {
   border: 2px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+/* Dino character */
 #dino {
   position: absolute;
   bottom: 0;
@@ -29,6 +34,7 @@ body {
   border-radius: 5px;
 }
 
+/* Obstacle */
 #obstacle {
   position: absolute;
   bottom: 0;
@@ -39,6 +45,7 @@ body {
   border-radius: 5px;
 }
 
+/* Score display */
 #score {
   position: absolute;
   top: 10px;
@@ -48,6 +55,7 @@ body {
   color: #333;
 }
 
+/* Game over screen */
 #game-over {
   display: none;
   position: absolute;
@@ -61,8 +69,10 @@ body {
   text-align: center;
 }
 
-#game-over h2 {
+#game-over h1 {
   margin-bottom: 10px;
+  font-size: 32px;
+  color: #d32f2f;
 }
 
 #game-over button {
