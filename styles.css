@@ -1,86 +1,195 @@
-/* Reset and base styles */
+/* --- Configuration Variables --- */
+:root {
+    --bg-color: #f0f8ff;
+    --game-width: 800px;
+    --game-height: 300px;
+    --ground-height: 20px;
+    --dino-color: #4CAF50;
+    --obstacle-color: #d32f2f;
+    --speed: 2s; /* Global Game Speed */
+}
+
+/* --- Base Styles --- */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f0f8ff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    overflow: hidden;
+    cursor: pointer; /* Indicates interactive area */
 }
 
-/* Game container */
-#game-container {
-  position: relative;
-  width: 800px;
-  height: 300px;
-  background: #fff;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.game-container {
+    position: relative;
+    width: var(--game-width);
+    height: var(--game-height);
+    background: var(--bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    border: 4px solid #fff;
 }
 
-/* Dino character */
-#dino {
-  position: absolute;
-  bottom: 0;
-  left: 50px;
-  width: 50px;
-  height: 50px;
-  background: green;
-  border-radius: 5px;
+/* --- The Ground --- */
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--ground-height);
+    background: #795548;
+    z-index: 10;
+    border-top: 2px solid #5d4037;
 }
 
-/* Obstacle */
-#obstacle {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 30px;
-  height: 50px;
-  background: red;
-  border-radius: 5px;
+/* --- The Dino --- */
+.dino {
+    position: absolute;
+    bottom: var(--ground-height);
+    left: 50px;
+    width: 50px;
+    height: 50px;
+    background: var(--dino-color);
+    border-radius: 5px;
+    z-index: 20;
+    /* Physics Simulation */
+    transition: bottom 0.3s cubic-bezier(0.4, 0, 1, 1); /* Fast fall */
 }
 
-/* Score display */
-#score {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
+.dino .eye {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
 }
 
-/* Game over screen */
-#game-over {
-  display: none;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #aaa;
-  text-align: center;
+.dino .mouth {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    width: 10px;
+    height: 2px;
+    background: white;
 }
 
-#game-over h1 {
-  margin-bottom: 10px;
-  font-size: 32px;
-  color: #d32f2f;
+/* --- Interaction Logic (The "Jump") --- */
+/* When the user clicks anywhere on the screen (body:active), the dino moves up */
+body:active .dino {
+    bottom: 150px; /* Jump Height */
+    transition: bottom 0.4s cubic-bezier(0, 0, 0.2, 1); /* Smooth ascent */
 }
 
-#game-over button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background: #0077cc;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* --- Obstacles --- */
+.obstacle {
+    position: absolute;
+    bottom: var(--ground-height);
+    right: -50px; /* Start off screen */
+    width: 30px;
+    height: 50px;
+    background: var(--obstacle-color);
+    border-radius: 5px;
+    z-index: 15;
 }
+
+/* Animation Definitions */
+.obstacle-1 {
+    animation: moveObstacle 2.5s infinite linear;
+}
+
+.obstacle-2 {
+    animation: moveObstacle 3.2s infinite linear;
+    animation-delay: 1.2s; /* Offset to create rhythm */
+    height: 30px; /* A smaller obstacle */
+    background: #e64a19;
+}
+
+@keyframes moveObstacle {
+    0% { right: -50px; }
+    100% { right: 100%; }
+}
+
+/* --- Environment / Decor --- */
+.sun {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    width: 40px;
+    height: 40px;
+    background: #FFeb3b;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #fbc02d;
+}
+
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 20px;
+    opacity: 0.8;
+}
+
+.cloud-1 {
+    width: 80px;
+    height: 30px;
+    top: 50px;
+    left: -100px;
+    animation: moveCloud 15s infinite linear;
+}
+
+.cloud-2 {
+    width: 60px;
+    height: 25px;
+    top: 80px;
+    left: -100px;
+    animation: moveCloud 20s infinite linear;
+    animation-delay: 5s;
+}
+
+@keyframes moveCloud {
+    0% { left: -100px; }
+    100% { left: 100%; }
+}
+
+/* --- CSS-Only Score Counter --- */
+.score-board {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    gap: 10px;
+}
+
+/* Simulate a score by moving a very long pseudo element */
+.score-counter::after {
+    content: "000 010 020 030 040 050 060 070 080 090 100 110 120 130";
+    /* This implies a "strip" of numbers */
+    display: block;
+    width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: countScore 10s steps(14) infinite;
+}
+
+@keyframes countScore {
+    0% { text-indent: 0; }
+    100% { text-indent: -70ch; } /* Move the text strip left */
+}
+
+/* --- Instructions Text --- */
+.instructions {
+    margin-top: 20px;
+    color: #aaa;
+    text-align: center;
+}
+
+.instructions h3 { margin-bottom: 5px
