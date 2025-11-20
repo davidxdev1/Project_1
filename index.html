@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dino Game</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CSS Dino Runner</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="game-container">
-    <div id="score">Score: 0</div>
-    <div id="dino"></div>
-    <div id="obstacle"></div>
-  </div>
+    <!-- The entire body acts as the input trigger -->
+    <div class="game-container">
+        <!-- Sky & Environment -->
+        <div class="score-board">Score: <div class="score-counter"></div></div>
+        <div class="sun"></div>
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
 
-  <div id="game-over">
-    <h1>Game Over</h1>
-    <p>Your Score: <span id="final-score">0</span></p>
-    <button onclick="location.reload()">Play Again</button>
-  </div>
-
-  <script src="script.js"></script>
+        <!-- Game Elements -->
+        <div class="dino">
+            <div class="eye"></div>
+            <div class="mouth"></div>
+        </div>
+        
+        <!-- Multiple obstacles with different delays for variety -->
+        <div class="obstacle obstacle-1"></div>
+        <div class="obstacle obstacle-2"></div>
+        
+        <div class="ground"></div>
+    </div>
+    
+    <div class="instructions">
+        <h3>CSS-Only Mode</h3>
+        <p>Click & Hold to Jump/Fly</p>
+        <p>(Collision detection requires JavaScript)</p>
+    </div>
 </body>
 </html>
